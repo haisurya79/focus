@@ -8,23 +8,23 @@
       text-align: center;
     }
     #display {
-      font-size: 60px;
-      margin-bottom: 45px;
+      font-size: 50px;
+      margin-bottom: 30px;
     }
     #answer-input {
-      width: 100px;
-      height: 35px;
+      width: 70px;
+      height: 30px;
       font-size: 35px;
-      margin-bottom: 35px;
+      margin-bottom: 25px;
     }
     #submit-btn {
-      width: 100px;
-      height: 30px;
-      font-size: 16px;
+      width: 70px;
+      height: 40px;
+      font-size: 30px;
     }
     #result-display {
-      font-size: 40px;
-      margin-top: 30px;
+      font-size: 25px;
+      margin-top: 20px;
     }
   </style>
 </head>
@@ -33,12 +33,16 @@
   <input id="answer-input" type="number" placeholder="Enter answer" autofocus>
   <button id="submit-btn">Submit</button>
   <p id="result-display"></p>
+  <ul id="list">
+     </ul>
+  <!-- <p id = "list1"> gfghjk</p>    -->
   
   
 </body>
 
 <script>
-let num1, num2, startTime, correctAnswer;
+let response,allresponses,num1, num2, startTime, correctAnswer;
+
 
 // function to generate new numbers and display problem
 function generateProblem() {
@@ -56,12 +60,37 @@ function checkAnswer() {
   const timeTaken = (endTime - startTime) / 1000; // calculate time taken in seconds
   if (userAnswer === correctAnswer) {
     document.getElementById("result-display").innerHTML = `Correct! Time taken: ${timeTaken} seconds`;
+    oldresponses1(timeTaken);
   } else {
     document.getElementById("result-display").innerHTML = `Incorrect. Correct answer was ${correctAnswer}. Time taken: ${timeTaken} seconds`;
-  }
-   document.getElementById("answer-input").value = ""; // clear input field
+    oldresponses2(timeTaken);
+  } 
+  //oldresponses(timeTaken);
+ //console.log(timeTaken);
+  
+ console.log("abc")
+  document.getElementById("answer-input").value = ""; // clear input field
    document.getElementById("answer-input").focus();
   setTimeout(generateProblem, 1); // generate new problem after 2 seconds
+}
+
+function oldresponses1(huyi){
+ response = document.getElementById("list");
+  allresponses = document.createElement("li");
+  console.log(huyi)
+ allresponses.innerText = huyi ;
+ allresponses.style.color = "blue";
+ response.insertBefore(allresponses,response.children[0]);
+}
+function oldresponses2(huyi){
+ response = document.getElementById("list");
+  allresponses = document.createElement("li");
+  console.log(huyi)
+ allresponses.innerText = huyi ;
+ allresponses.style.color = "red";
+ response.insertBefore(allresponses,response.children[0]);
+
+
 }
 
 // event listener for submit button
@@ -73,7 +102,11 @@ document.getElementById("submit-btn").addEventListener("click", checkAnswer);
 document.getElementById("answer-input").addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
     checkAnswer();
+    
     generateProblem();
+
+     //oldresponses();
+    
    
   }
 });
