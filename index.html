@@ -26,35 +26,66 @@
       font-size: 25px;
       margin-top: 20px;
     }
+    #right{
+      color: green;
+    }
+    #wrong{
+      color : red;
+    }
     li{
       /* border : solid black; */
-      width: 60px;
-      height: 30px;
-      font-size: 25px;
+      width: 40px !important;
+      height: 47px !important;
+      margin: 10px !important;
+      font-size: 1rem !important;
 
     }
     ul{
-      display:flex;
-      justify-content: center;
-      align-items:center; 
-      flex-direction:column;
+      display:flex !important;
+      justify-content: center !important;
+      align-items:center !important; 
+      flex-direction:column !important;
     }
   </style>
 </head>
 <body>
-  <h1 id="display"></h1>
+  <div id="maindisplay">
+     <h1 id="display"></h1>
+    
+  
   <input id="answer-input" type="number" placeholder="Enter answer" autofocus>
   <button id="submit-btn">Submit</button>
   <p id="result-display"></p>
+</div> 
+  <p id="right">0</p> 
+  <p id="wrong">0</p>
+
+  <div id="maindisplay1"><p id="timeleft">30</p> 
   <ul id="list">
-     </ul>
+     </ul></div>
+  
   <!-- <p id = "list1"> gfghjk</p>    -->
   
   
 </body>
 
 <script>
-let response,allresponses,num1, num2, startTime, correctAnswer;
+let response,allresponses,num1, num2, startTime, correctAnswer,right,wrong;
+let wrongcounter = 0;let rightcounter = 0;
+
+let timeRemaining,counter;
+timeRemaining=document.getElementById("timeleft");
+counter =30;
+const intervalid=setInterval(()=>{
+  counter--;
+  if(counter<=0){
+    clearInterval(intervalid);
+    document.getElementById("maindisplay").style.display = "none";
+    document.getElementById("maindisplay1").style.display = "none";
+    
+  } timeRemaining.innerHTML = counter;
+},1000)
+
 
 
 // function to generate new numbers and display problem
@@ -67,6 +98,8 @@ function generateProblem() {
 }
 
 // function to check answer and display result
+console.log(wrongcounter);
+console.log("outside");
 function checkAnswer() {
   const userAnswer = parseInt(document.getElementById("answer-input").value);
   const endTime = new Date().getTime(); // record end time
@@ -74,9 +107,20 @@ function checkAnswer() {
   if (userAnswer === correctAnswer) {
     document.getElementById("result-display").innerHTML = `Correct! Time taken: ${timeTaken} seconds`;
     oldresponses1(timeTaken);
+    
+    right = document.getElementById("right");
+    console.log(right);
+    right.innerHTML =++rightcounter; 
   } else {
+    console.log(wrongcounter);console.log("inside1");
+    console.log(wrong);
     document.getElementById("result-display").innerHTML = `Incorrect. Correct answer was ${correctAnswer}. Time taken: ${timeTaken} seconds`;
     oldresponses2(timeTaken);
+   
+    wrong = document.getElementById("wrong");
+    wrong.innerHTML = ++wrongcounter;
+    console.log(wrongcounter);console.log("inside2");
+
   } 
   //oldresponses(timeTaken);
  //console.log(timeTaken);
