@@ -46,6 +46,16 @@
       align-items:center !important; 
       flex-direction:column !important;
     }
+    #restart{
+      display:none;
+    }
+    #horizontalstyle{
+      display:flex !important;
+       justify-content: space-around !important; 
+      align-items:center !important;  
+      margin: 20px !important;
+      border: 1px solid red;
+    }
   </style>
 </head>
 <body>
@@ -57,12 +67,14 @@
   <button id="submit-btn">Submit</button>
   <p id="result-display"></p>
 </div> 
-  <p id="right">0</p> 
+ <div id="horizontalstyle"> <p id="right">0</p> 
   <p id="wrong">0</p>
+  </div>
 
   <div id="maindisplay1"><p id="timeleft">30</p> 
   <ul id="list">
      </ul></div>
+     <button id="restart" type="button">Restart</button>
   
   <!-- <p id = "list1"> gfghjk</p>    -->
   
@@ -75,18 +87,22 @@ let wrongcounter = 0;let rightcounter = 0;
 
 let timeRemaining,counter;
 timeRemaining=document.getElementById("timeleft");
-counter =30;
+counter =50;
 const intervalid=setInterval(()=>{
   counter--;
   if(counter<=0){
     clearInterval(intervalid);
     document.getElementById("maindisplay").style.display = "none";
     document.getElementById("maindisplay1").style.display = "none";
-    
+    document.getElementById("restart").style.display = "block";
   } timeRemaining.innerHTML = counter;
 },1000)
 
-
+const refresh = document.getElementById("restart")
+function handleclick(){
+  window.location.reload();
+  }
+  refresh.addEventListener("click",handleclick);
 
 // function to generate new numbers and display problem
 function generateProblem() {
